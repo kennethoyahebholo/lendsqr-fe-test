@@ -1,9 +1,10 @@
 import React from 'react';
+import Router from './screens/route'
 
 function App() {
   return (
-    <div className="App">
-      Hello World
+    <div className="">
+      <Router />
     </div>
   );
 }
