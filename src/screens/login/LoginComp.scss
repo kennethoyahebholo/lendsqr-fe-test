@@ -1,0 +1,60 @@
+.admin-login-cover{
+  background-color: #FFFFFF;
+  height: 100vh;
+  padding-bottom: 214px;
+
+  padding-top: 55px !important;
+
+ @media (max-height:691px) {
+    height: 900px;
+  }
+  @media (max-width:1750px) {
+    padding-left: 0px !important;
+  }
+  @media (max-width:1113px) {
+   height: 100vh;
+  }
+  @media (max-width:767px) {
+   display: none;
+  }
+
+  &-logo{
+    margin-bottom: 120px !important;
+    
+
+      padding-left: 89px !important;
+
+    @media (max-width:834px) {
+      padding-left: 25px !important;
+    }
+  }
+  &-title{
+    font-family: 'Calibre_Medium';
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 77px;
+
+      padding-left: 89px !important;
+
+    @media (max-width:1113px) {
+      font-size: 44px;
+      line-height: 50px;
+    }
+    @media (max-width:834px) {
+      padding-left: 25px !important;
+    }
+    color: #FCFAFF;
+    margin-bottom: 50px !important;
+  }
+  &-icon{
+    padding-bottom: calc(100vh - 673px);
+      display: flex;
+      justify-content: center;
+      img{
+        object-fit: contain;
+        @media (max-width:1200px) {
+          width: 350px;
+    }
+      }
+  }
+}

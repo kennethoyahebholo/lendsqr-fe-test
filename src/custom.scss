@@ -25,17 +25,368 @@
 }
 
 @font-face {
-  font-family: "avenir";
-  src: local("Avenir"), url(assets/fonts/AvenirNextLTPro-Regular.otf) format("otf");
+  font-family: "Avenir";
+  src: url(assets/fonts/AvenirNextLTPro-Regular.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Avenir-Heavy";
-  src: local("Avenir-Heavy"), url(assets/fonts/AvenirNextLTPro-Bold.otf) format("otf");
+  src: url(assets/fonts/AvenirNextLTPro-Bold.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Avenir-IT";
-  src: local("AvenirLTStd-IT"),
-    url(assets/fonts/AvenirNextLTPro-It.otf) format("otf");
+  src: url(assets/fonts/AvenirNextLTPro-It.otf) format("opentype");
+}
+
+$primary: #5941a9;
+$secondary: #212127;
+$danger: #ff4136;
+
+.MuiFilledInput-underline:before {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "\00a0";
+  position: absolute;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  pointer-events: none;
+}
+
+h3 {
+  font-family: "Avenir";
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.error-flag {
+  font-size: 12px;
+  color: rgb(160, 70, 70);
+  font-family: Avenir-Medium;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.p-6 {
+  padding: 1.5em;
+}
+
+.p-8 {
+  padding: 2em;
+}
+.py-2 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.py-4 {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.pt-4 {
+  padding-top: 1em;
+}
+.ml-2 {
+  margin-left: 0.5em;
+}
+
+.mr-4 {
+  margin-right: 1em;
+}
+
+.mr-2 {
+  margin-right: 0.5em;
+}
+
+.ml-4 {
+  margin-left: 1em;
+}
+
+.flexed-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexed-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.flexed-row {
+  display: flex;
+}
+.align-end {
+  align-items: flex-end;
+}
+
+.logo-upload {
+  margin-top: 2em;
+  input {
+    display: none;
+  }
+  label {
+    cursor: pointer;
+  }
+  .link-upload {
+    cursor: pointer;
+    font-family: "Avenir";
+    font-size: 0.8em;
+    letter-spacing: -0.5px;
+    text-decoration-line: underline;
+    color: #5941a9;
+    // border-bottom: 1px solid #5941A9;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  img {
+    width: 6.5em;
+    height: 6.5em;
+    object-fit: contain;
+  }
+}
+
+.flex-inputs {
+  display: grid;
+  grid-template-columns: 49% 49%;
+  width: 100%;
+  grid-gap: 2%;
+}
+
+.country-phone-inp {
+  border-radius: 0 5px 5px 0 !important;
+  border-left: none !important;
+}
+
+.app-modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.ml-1 {
+  margin-left: 0.5em;
+}
+
+.css-19n335a-ToastContainer {
+  z-index: 1000;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  h6 {
+    font-family: "Avenir";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.3em;
+    line-height: 18px;
+    color: #272643;
+    margin: 0;
+    margin-left: 0.5em;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flexed-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-comp {
+  display: flex;
+  align-items: flex-end;
+  .label-ref {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.1em;
+    h6 {
+      margin: 0;
+      margin-left: 0.1em;
+      font-family: "Avenir";
+      font-weight: 600;
+      font-size: 0.7em;
+      color: #272643;
+    }
+  }
+}
+
+.disabled-link {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.label-header {
+  margin-bottom: 1em;
+  margin-left: 0.5em;
+  .name-title {
+    font-size: 1.3em;
+    color: #252733;
+    font-family: "Avenir" !important;
+    letter-spacing: 0.3px;
+    margin: 0 0.2em;
+    text-transform: capitalize;
+  }
+  .arrow-div {
+    height: 100%;
+    margin-top: 0.2em;
+  }
+}
+
+.py-8 {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.mb-8 {
+  margin-bottom: 2em !important;
+}
+
+.pointer {
+  cursor: pointer;
+  svg {
+    cursor: pointer;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.twin-buttons-cover {
+  max-width: 370px;
+  margin: 2.4em auto 0;
+  width: fit-content;
+  display: flex;
+  .app-buttons {
+    font-size: 1em;
+    margin-bottom: 0;
+    padding: 0.5em 1.6em;
+    border-radius: 8px;
+    span {
+      font-size: 0.8em;
+    }
+  }
+  .cancel-type {
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+    color: #344054;
+  }
+  .save-type {
+    background: #5941a9;
+    border: 1px solid #5941a9;
+    color: white;
+    margin-left: 0.7em;
+  }
+}
+
+.status-styles {
+  .enabled-default,
+  .active-status,
+  .inactive-status,
+  .out-of-stock,
+  .pending-status,
+  .transit-status,
+  .credit-status,
+  .debit-status,
+  .defaulting-status,
+  .not-due-status,
+  .card-status {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 73px;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 100px;
+    font-size: 10px;
+    width: 73px;
+    height: 22px;
+  }
+
+  .active-status {
+    color: #05603a;
+    background: rgba(0, 196, 140, 0.07);
+  }
+
+  .defaulting-status {
+    color: #312360;
+    background: rgba(220, 216, 236, 0.3);
+  }
+
+  .not-due-status {
+    color: #344054;
+    background: #f2f4f7;
+  }
+
+  .enabled-default {
+    background-color: #dceddd;
+    color: #2dad31;
+  }
+
+  .inactive-status {
+    background: rgba(254, 205, 202, 0.3);
+    color: #912018;
+  }
+
+  .out-of-stock {
+    background-color: #f1f5ff;
+    color: #a6aab4;
+  }
+
+  .pending-status {
+    background: #fffbf1;
+    color: #93370d;
+  }
+
+  .credit-status {
+    color: #5941a9;
+    background: rgba(89, 65, 169, 0.1);
+  }
+
+  .card-status {
+    background-color: #fbebca;
+    color: #e3a11b;
+  }
+
+  .colorize-green {
+    color: #0c9923;
+  }
+
+  .colorize-red {
+    color: #d90b0b;
+  }
+
+  .colorize-yellow {
+    color: orange;
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 15px;
 }
