@@ -4,14 +4,14 @@ import {
   BrowserRouter, Route, Routes,
 } from 'react-router-dom';
 import Login from './login';
-import Dashboard from './dashboard';
+import User from './user';
 
 const Router: FunctionComponent = () => (
      <BrowserRouter>
      <div className="">
       <Routes>
         <Route  path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<User />} />
        </Routes>
      </div>
      <ToastContainer />
