@@ -1,21 +1,17 @@
 import React from 'react'
 import './LoginComp.scss'
-import {
-  Logo,
-  ClipArt
-} from "../../assets/index";
 
+import { ReactComponent as Logo } from "../../assets/svgs/loginLogo.svg";
+import { ReactComponent as ClipArt } from "../../assets/svgs/art.svg";
 
-type Props = {}
-
-const LoginComp = (props: Props) => {
+const LoginComp = () => {
   return (
     <div className="col-md-6 col-12 admin-login-cover p-0 m-0">
     <div className="admin-login-cover-logo">
-      <img  src={Logo} alt="" />
+      <Logo />
     </div>
     <div className="admin-login-cover-icon">
-    <img src={ClipArt} alt="" />
+      <ClipArt />
     </div>
   </div>
   )

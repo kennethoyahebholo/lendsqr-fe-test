@@ -1,10 +1,8 @@
 import {
-  FunctionComponent, useState, useMemo, useEffect,
+  FunctionComponent
 } from 'react';
 import DashboardWrap from '../../components/DashboardWrap';
 import DashboardHeader from '../../components/DashboardHeader'
-
-type Props = {}
 
 const Dashboard: FunctionComponent = () => {
   return (
