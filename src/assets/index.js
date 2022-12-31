@@ -5,6 +5,7 @@ import Avatar from "./images/avatar.png";
 import DropIcon from "./images/dropdown.png";
 import SearchIcon from "./images/search.png";
 import notIcon from "./images/notification.png";
+import Icon from "./images/home.png"
 
 export {
   Logo,
@@ -13,5 +14,6 @@ export {
   Avatar,
   DropIcon,
   SearchIcon,
-  notIcon
+  notIcon,
+  Icon
 }
