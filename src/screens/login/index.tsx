@@ -37,7 +37,7 @@ const Login: FunctionComponent<ILogin> = () => {
            <span
            className="pointer">FORGOT PASSWORD?</span>
          </div>
-         <button className={`mb-2 form-btn bg-primary text-white rounded`}>
+         <button className={`mb-2 form-btn text-white rounded`}>
            {!true ? (
             <span>LOGGING IN</span>
            ) : (
