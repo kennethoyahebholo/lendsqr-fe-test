@@ -28,6 +28,7 @@ import { ReactComponent as DownIcon } from "../../assets/svgs/down.svg";
 
 export interface ISideBar {
   disabled?: boolean;
+  activate?:any;
   closeDropDownAndSideBar?: () => void;
 }
 

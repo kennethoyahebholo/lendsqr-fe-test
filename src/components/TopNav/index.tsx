@@ -2,15 +2,30 @@ import { FunctionComponent } from 'react';
 import "./TopNav.scss"
 import { DashboardLogo, Avatar, DropIcon, SearchIcon, notIcon } from '../../assets/index';
 
+import MobileMenuIcon from '../../assets/svgs/MobileMenuIcon';
+
 export interface ITopNav {
   label?: string;
   dropdownObj?: any;
 }
 
 
+
+
 const TopNav: FunctionComponent<ITopNav> = ({ dropdownObj }) => {
+
+  const handleToggleMenu = () => {
+    dropdownObj?.setShowSideBar(true);
+  };
+
   return (
     <div className="navbar-cover d-flex items-center">
+      <div className="navbar-cover-menu">
+        <span onClick={handleToggleMenu}>
+          <MobileMenuIcon />
+        </span>
+
+      </div>
      <div className="navbar-cover-logo">
       <img src={DashboardLogo} alt="" />
      </div>

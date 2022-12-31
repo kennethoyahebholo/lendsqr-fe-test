@@ -4,6 +4,20 @@
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   align-items: center;
   justify-content: space-between;
+  &-logo{
+    display: block;
+    padding-left: 20px;
+    @media (max-width:991px) {
+      display: none;      
+    }
+  }
+  &-menu{
+    display: none;
+    @media (max-width:991px) {
+      display: block;
+      padding-left: 20px;
+    }
+  }
   &-search{
     font-weight: 400;
     font-size: 14px;
@@ -124,7 +138,7 @@
     border-bottom: none;
     &-mobile-title{
       flex-grow: 1;
-    justify-content: center;
+      justify-content: center;
       align-items: center;
       display: flex;
       visibility: visible;
@@ -135,6 +149,12 @@
       color: #00022F;
       font-family: Avenir;
       text-transform: uppercase;
+    }
+    &-menu{
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+
     }
     &-menu{
       display: flex;

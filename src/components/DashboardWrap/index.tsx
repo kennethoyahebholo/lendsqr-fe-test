@@ -3,6 +3,8 @@ import "./DashboardWrap.scss"
 import SideBar from '../Sidebar'
 import TopNav from "../TopNav"
 
+import CloseIcon from '../../assets/svgs/CloseIcon';
+
 export interface IDashboardWrap {
   label?: string;
   children?: any;
@@ -74,28 +76,28 @@ const DashboardWrap: FunctionComponent<IDashboardWrap> = ({
         <div className="mobile-sidebar-cover">
           <div className="mobile-sidebar-cover-close-icon">
             <div className="rounded-menu-icon-div" onClick={handleCloseSidebar}>
-              {/* <CloseIcon color="#000000" width="8px" height="8px" /> */}
+              <CloseIcon color="#000000" width="8px" height="8px" />
             </div>
           </div>
-          {/* <SideBar activate disabled={disabled} closeDropDownAndSideBar={closeDropDownAndSideBar} /> */}
+          <SideBar activate disabled={disabled} closeDropDownAndSideBar={closeDropDownAndSideBar} />
         </div>
         )
       }
       <TopNav
-          // dropdownObj={{
-          //   showTopDropdown,
-          //   setShowTopDropdown,
-          //   setShowSideBar,
-          //   showSideMenu,
-          // }}
+          dropdownObj={{
+            showTopDropdown,
+            setShowTopDropdown,
+            setShowSideBar,
+            showSideMenu,
+          }}
         />
       <div className="col-lg-3 merchant-dashboard-cover-sidebar m-0 p-0">
         <div className="desktop-sidebar-cover">
           <SideBar 
-          // activate
-           // disabled={disabled}
-            // closeDropDownAndSideBar={closeDropDownAndSideBar}
-             />
+            activate
+            disabled={disabled}
+            closeDropDownAndSideBar={closeDropDownAndSideBar}
+          />
         </div>
       </div>
       <div className="col-xl col-lg-9 col-12 merchant-dashboard-cover-container m-0 p-0">
