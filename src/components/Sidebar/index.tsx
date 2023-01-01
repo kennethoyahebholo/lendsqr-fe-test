@@ -40,7 +40,7 @@ const SideBar: FunctionComponent<ISideBar> = ({ disabled, closeDropDownAndSideBa
     {
       disabled,
       icon: UserIcon,
-      link: '/users/all?page=1',
+      link: '',
       name: 'Users',
     },
     {
@@ -184,7 +184,7 @@ const SideBar: FunctionComponent<ISideBar> = ({ disabled, closeDropDownAndSideBa
                 disabled={disabled}
                 Icon={HomeIcon}
                 name={"Dashboard"}
-                link={""}
+                link={"/dashboard"}
                 closeDropDownAndSideBar={closeDropDownAndSideBar}
               />
           </ul>

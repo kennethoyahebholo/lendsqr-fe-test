@@ -83,6 +83,12 @@ const TextInput: FunctionComponent<ITextInput> = ({
   const handleMouseDownPassword = (event: any) => {
     event.preventDefault();
   };
+
+  const handleChange = (event: any) => {
+    const { value } = event.target;
+    if (onChange && value) onChange(value);
+    if (customOnChange) customOnChange(event);
+  };
   return (
     <div className="text-wrap">
      <div style={{
@@ -99,7 +105,7 @@ const TextInput: FunctionComponent<ITextInput> = ({
           name={name}
           value={value}
           disabled={disabled || viewOnly}
-          // onChange={handleChange}
+          onChange={handleChange}
           style={{
            // display: 'none',
             border: '2px solid rgba(84, 95, 125, 0.15)',

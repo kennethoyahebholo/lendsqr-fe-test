@@ -1,10 +1,15 @@
 import React from 'react'
+import './styles.scss'
 
-type Props = {}
+type Props = {
+  title?: string
+}
 
-const index = (props: Props) => {
+const index = ({title}: Props) => {
   return (
-    <div>index</div>
+    <div className='header-comp'>
+      <h4>{title}</h4>
+    </div>
   )
 }
 

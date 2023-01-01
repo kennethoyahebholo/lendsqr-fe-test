@@ -1,0 +1,44 @@
+.settlement-merchant {
+ padding: 2.9rem;
+  .settlement-card-covers {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
+      &::-webkit-scrollbar-track {
+      background: white;
+    }
+      &::-webkit-scrollbar-thumb {
+      background: white;
+        border-radius:10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+
+      background: white;
+    }
+    @media (max-width:1170px) {
+      overflow-x: scroll;
+
+    }
+
+    .settlement-flashcard-new {
+      margin-right: 24px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .settlement-table-cover {
+    padding: 16px 0 0;
+    border: 1px solid #f2f4f7;
+    .dashboard-header {
+      // margin-bottom: 4px;
+      margin-left: 16px;
+    }
+  }
+}
