@@ -20,3 +20,26 @@ export const getItemsToLocalStorage = (name:any) => {
   return actualData;
 };
 
+export function buildPageQuery(pageQuery?: Record<string, any>, appendQuestionMark = true): string {
+	if (!pageQuery) return '';
+
+	let query = Object.keys(pageQuery)
+		.reduce((query: string[], key) => {
+			let value = pageQuery[key];
+			if (typeof value === 'string') {
+				value = value.trim();
+			}
+
+			if ((value || typeof value == 'boolean') && value !== '') {
+				query.push(`${key}=${value}`);
+			}
+
+			return query;
+		}, [])
+		.join('&');
+
+	if (appendQuestionMark && query && query !== '') query = '?' + query;
+
+	return query;
+}
+
