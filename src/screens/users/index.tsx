@@ -22,7 +22,7 @@
 // export default Users;
 
 import {
-  FunctionComponent, useState
+  FunctionComponent, useState, useContext, useEffect
 } from 'react';
 import DashboardWrap from '../../components/DashboardWrap';
 import DashboardHeader from '../../components/DashboardHeader'
@@ -37,6 +37,17 @@ import { ReactComponent as loanUserIcon } from "../../assets/svgs/loanUserIcon.s
 
 import './user.scss'
 import Table from '../../components/Table';
+
+import {
+	UsersDispatchContext,
+	UsersStateContext,
+} from '../../store/Users/user.provider';
+import { ActionType } from '../../store/Users/user.reducer';
+import { IPageQuery } from '../../services/users.services';
+import {
+	listUsersAction,
+	userLoadingAction,
+} from '../../store/Users/users.actions';
 
 interface IUserTableRecord{
   defaultUrl?:string;
@@ -91,6 +102,28 @@ const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId
 
   const { getColumns, applyChanges, selectedColumns } = useTableColumn(allColumns, toggleStorageId);
   const [userRec, setuserRec] = useState(null);
+
+  const { loading, users, meta } = useContext(UsersStateContext);
+
+	const dispatch = useContext(UsersDispatchContext) as React.Dispatch<ActionType>;
+
+	const dispatchUsers = async (pageQuery?: IPageQuery) => {
+		try {
+			dispatch(userLoadingAction(true));
+			dispatch(await listUsersAction(pageQuery));
+		} catch (error: any) {
+			console.log(error?.response?.message || error?.message || 'User Fatal error');
+			dispatch(userLoadingAction(false));
+		}
+	};
+
+  // useEffect(()=>{
+  //   console.log(dispatch)
+  // },[dispatch])
+
+  useEffect(() => {
+		dispatchUsers();
+	}, []);
 
   return (
       <DashboardWrap>

@@ -1,7 +1,7 @@
 import { buildPageQuery } from '../utils/helpers';
-import axios from 'axios';
+import axios from "axios"
 
-interface IPageQuery {
+export interface IPageQuery {
 	page?: number;
 	search?: string;
 	status?: string;
@@ -14,17 +14,18 @@ interface IPageQuery {
 }
 
 export const lendSqrApi = axios.create({
-	baseURL: "https://6270020422c706a070b72c.mockapi.io/lendsqr/api/v1/",
+	baseURL: "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/",
 	timeout:  100000,
 });
 
-const USERS_ENDPOINT = "users"
+const USERS_ENDPOINT = "/users"
 
 export const listUsers = async (pageQuery?: IPageQuery) => {
 	try {
 		const url = `${USERS_ENDPOINT}${buildPageQuery(pageQuery)}`;
 		const { data } = await lendSqrApi.get(url);
-		return data.data;
+  console.log(data)
+		return data;
 	} catch (error) {
 		throw error;
 	}
@@ -41,3 +42,4 @@ export const findUser = async (userId: string) => {
 		throw new Error(data?.message || 'fatal error');
 	}
 };
+

@@ -6,13 +6,18 @@ import {
 } from 'react-router-dom';
 import Login from './login';
 import User from './users';
+import { UserProvider } from '../store/Users/user.provider';
 
 const Router: FunctionComponent = () => (
      <BrowserRouter>
      <div className="">
       <Routes>
         <Route  path="/" element={<Login />} />
-        <Route path="/user/all/*" element={<User />} />
+        <Route path="/user/all/*" element={
+        <UserProvider>
+          <User />
+        </UserProvider>
+        } />
        </Routes>
      </div>
      <ToastContainer />
