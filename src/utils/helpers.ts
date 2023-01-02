@@ -1,3 +1,6 @@
+import moment from 'moment';
+// import moment = require('moment');
+
 export const cleanColumnArray = (columns: any) => columns?.map?.((ele:any) => {
   if (Array.isArray(ele)) {
     return ele?.join('__');
@@ -42,4 +45,29 @@ export function buildPageQuery(pageQuery?: Record<string, any>, appendQuestionMa
 
 	return query;
 }
+
+export const titleCase = (s: string) =>
+	s
+		.replace(/^[-_]*(.)/, (_, c) => c.toUpperCase()) // Initial char (after -/_)
+		.replace(/[-_]+(.)/g, (_, c) => ' ' + c.toUpperCase()); // First char after each -/_
+
+export const capitalizeFirstLetter = (string: string) => {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const truncate = (str: string | undefined, n: number) => {
+	if (typeof str === 'string') return str.length > n ? str.substring(0, n - 1) + '...' : str;
+	return str;
+};
+
+export function toDateFormat(date: string | number | Date, format: string = 'DD MMMM YYYY') {
+	return moment(new Date(date)).format(format);
+}
+
+// export const toDateFormat = (date: string | number, format: string = 'DD MMMM YYYY', returnVal: string = '______') => {
+//   if (!date) return returnVal;
+//   if (new Date(date).toString() === 'Invalid Date') return returnVal;
+//   return moment(new Date(date)).format(format);
+// };
+
 

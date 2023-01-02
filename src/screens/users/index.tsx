@@ -36,7 +36,7 @@ import { ReactComponent as usersIcn } from "../../assets/svgs/usersIcon.svg";
 import { ReactComponent as loanUserIcon } from "../../assets/svgs/loanUserIcon.svg";
 
 import './user.scss'
-import Table from '../../components/Table';
+import Table from '../../components/Table/Table2';
 
 import {
 	UsersDispatchContext,
@@ -48,6 +48,7 @@ import {
 	listUsersAction,
 	userLoadingAction,
 } from '../../store/Users/users.actions';
+import { IUser } from '../../types/_model';
 
 interface IUserTableRecord{
   defaultUrl?:string;
@@ -77,6 +78,20 @@ const details =  [
         number: '102,453',
       },
     ]
+
+const formatUsers = (users: IUser[]) => {
+	if (users.length <= 0) return [];
+	return users.map((user: IUser) => {
+		return {
+			organization: user.orgName,
+      username: user.userName,
+			email: user.email,
+			phoneNumber: user.phoneNumber,
+      dateJoined: user.createdAt,
+			status: user.id,
+		};
+	});
+};
 
 const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId, hasNameAndImage}) => {
   const allColumns = [
@@ -123,6 +138,7 @@ const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId
 
   useEffect(() => {
 		dispatchUsers();
+    console.log(`hi${users}`)
 	}, []);
 
   return (
@@ -146,29 +162,20 @@ const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId
         </div>
         <div className="settlement-table-details-cover">
         {!userRec? (
-          <Table
-            // refreshing={getUsersLoading}
-            // page={page}
-            // setPage={setPage}
-            // pageSize={limit}
-            minHeight="calc(100vh - 280px)"
-            // count={settlementRec?.count}
-            // contents={cleanUpAdminAllSettlements(settlementRec?.settlements)}
-            reference="id"
-            hideDominantImage
-            clickable
-            hasNameAndImage={hasNameAndImage}
-            // handleClick={(data) => routeToSettlementDetails(data)}
-            allowKeyArr={getColumns(true)}
-            mobileAllowKeyArr={
-              [
-                'status',
-                ['name', 'settlementReference'],
-                ['type', 'totalAmount'],
-              ]
-            }
-            formatLabels={columnLabelFormat}
-          />
+      <Table
+				dispatchAction={dispatchUsers}
+				tableData={formatUsers(users)}
+				enableButton={true}
+				columns={[
+					'organization',
+					'username',
+					'email',
+					'phone number',
+					'date joined',
+					'status',
+				]}
+				loading={loading}
+			></Table>
         ) : (
           <EmptyRecord
             height="calc(100vh - 240px)"
