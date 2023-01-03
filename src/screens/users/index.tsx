@@ -5,6 +5,8 @@ import DashboardWrap from '../../components/DashboardWrap';
 import DashboardHeader from '../../components/DashboardHeader'
 import Card from './Card'
 
+import ReactPaginate from 'react-paginate';
+
 import { ReactComponent as UsersIcon } from "../../assets/svgs/aUsersIcon.svg";
 import { ReactComponent as SavingsIcon } from "../../assets/svgs/SavingsIcon.svg";
 import { ReactComponent as usersIcn } from "../../assets/svgs/usersIcon.svg";
@@ -24,7 +26,9 @@ import {
 	userLoadingAction,
 } from '../../store/Users/users.actions';
 import { IUser } from '../../types/_model';
-import Pagination from '../../components/Pagination';
+import { ReactComponent as PrevIcon } from "../../assets/svgs/prev-btn.svg";
+import { ReactComponent as NextIcon } from "../../assets/svgs/next-btn.svg";
+import { ReactComponent as DropIcon } from "../../assets/svgs/dropIcontPag.svg";
 
 const details =  [
       {
@@ -91,6 +95,22 @@ const Users = () => {
 		dispatchUsers();
 	}, []);
 
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 9;
+
+  useEffect(() => {
+		const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(usersDetails.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
+	}, [itemOffset, itemsPerPage, usersDetails]);
+
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % usersDetails.length;
+    setItemOffset(newOffset)
+  }
+
   return (
       <DashboardWrap>
         <div className="merchant">
@@ -113,7 +133,7 @@ const Users = () => {
         <div className="table-details-cover">
             <Table
               dispatchAction={dispatchUsers}
-              tableData={formatUsers(usersDetails)}
+              tableData={formatUsers(currentItems)}
               enableButton={true}
               columns={[
                 'organization',
@@ -125,7 +145,24 @@ const Users = () => {
               ]}
               loading={loading}
             ></Table>
-            {meta && <Pagination {...meta} dispatchAction={dispatchUsers} />}
+            <div className="pagination_con">
+              <div className='left_section'>
+                <h5>Showing<button>100<DropIcon /></button>out of 100</h5>
+              </div>
+            <ReactPaginate 
+              breakLabel="..."
+              nextLabel={<NextIcon />}
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={2}
+              pageCount={pageCount}
+              previousLabel={<PrevIcon />}
+              containerClassName='pagination'
+              pageLinkClassName='page-num'
+              previousLinkClassName='page-num'
+              nextLinkClassName='page-num'
+              activeLinkClassName='active'
+            />
+            </div>
           </div>
         </div>        
       </DashboardWrap>
