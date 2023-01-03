@@ -14,6 +14,7 @@ const Router: FunctionComponent = () => (
      <div className="">
       <Routes>
         <Route  path="/" element={<Login />} />
+        <Route  path="/login" element={<Login />} />
         <Route path="/user/all/*" element={
         <UserProvider>
           <User />

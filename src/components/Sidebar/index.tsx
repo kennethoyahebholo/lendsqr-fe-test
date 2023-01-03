@@ -24,6 +24,7 @@ import { ReactComponent as SettlementIcon } from "../../assets/svgs/settlement.s
 import { ReactComponent as ReportIcon } from "../../assets/svgs/reports.svg";
 import { ReactComponent as AccountIcon } from "../../assets/svgs/account.svg";
 import { ReactComponent as DownIcon } from "../../assets/svgs/down.svg";
+import { ReactComponent as SignOutIcon } from "../../assets/svgs/sign-out.svg";
 
 
 export interface ISideBar {
@@ -232,6 +233,17 @@ const SideBar: FunctionComponent<ISideBar> = ({ disabled, closeDropDownAndSideBa
                 />
               ))
             }
+          </ul>
+
+          <ul className='sign_out'>
+              <LinkComp
+                disabled={disabled}
+                Icon={SignOutIcon}
+                name={"Sign Out"}
+                link={"/login"}
+                closeDropDownAndSideBar={closeDropDownAndSideBar}
+              />
+              <small className='nav-link-comp'>v1.2.0</small>
           </ul>
         </div>
       </div>
