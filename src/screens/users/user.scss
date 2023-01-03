@@ -1,10 +1,11 @@
-.settlement-merchant {
+.merchant {
  padding: 2.9rem;
-  .settlement-card-covers {
+  .card-covers {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 4rem;
     
     
     &::-webkit-scrollbar {
@@ -26,14 +27,14 @@
 
     }
 
-    .settlement-flashcard-new {
+    .flashcard-new {
       margin-right: 24px;
       &:last-child {
         margin-right: 0;
       }
     }
   }
-  .settlement-table-cover {
+  .table-cover {
     padding: 16px 0 0;
     border: 1px solid #f2f4f7;
     .dashboard-header {

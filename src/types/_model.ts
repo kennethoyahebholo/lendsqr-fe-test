@@ -12,6 +12,7 @@ export interface IUser {
   phoneNumber: string,
   avatar: string | null,
   gender: string,
+  bvn: string | number,
   address: string,
   currency: string | number,
  },
@@ -51,4 +52,16 @@ export interface IPageMeta {
 	last_page_url: string;
 	next_page_url: string | null;
 	previous_page_url: string | null;
+}
+
+export interface IPageQuery {
+	page?: number;
+	search?: string;
+	status?: string;
+	role?: string;
+	amount?: string;
+	customer_id?: number | string;
+	limit?: string | null;
+	transaction_type?: string;
+	created_at?: string[];
 }

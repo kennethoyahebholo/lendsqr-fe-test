@@ -40,7 +40,7 @@ const SideBar: FunctionComponent<ISideBar> = ({ disabled, closeDropDownAndSideBa
     {
       disabled,
       icon: UserIcon,
-      link: '',
+      link: '/user/all/*',
       name: 'Users',
     },
     {

@@ -1,0 +1,64 @@
+.content-card-row-cover {
+  .content-card-cover {
+    padding-left: 34.5px !important;
+    margin-bottom: 32px;
+    @media (max-width: 767px) {
+      padding-left: 0px !important;
+      border-left: none;
+    }
+    .card-label {
+      color: #545F7D;
+      font-family: 'Work Sans';
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-family: 'Work Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: #545F7D;
+    }
+    .bnpl {
+      text-transform: uppercase;
+    }
+    .limit {
+      font-size: 23px;
+      font-weight: 500;
+      color: #261940;
+    }
+    .balance {
+      font-size: 16px;
+      font-weight: 500;
+      color: #261940;
+    }
+  }
+  .empty-content-card-cover {
+    border-left: none;
+    padding-left: 34.5px !important;
+    margin-bottom: 32px;
+    .card-label {
+      color: #98a2b3;
+      font-family: Inter_Regular;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      color: #121212;
+      font-family: Inter_Regular;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+  .content-card-cover:first-child {
+    border-left: none;
+    padding-left: 0 !important;
+  }
+}

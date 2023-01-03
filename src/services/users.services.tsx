@@ -24,7 +24,6 @@ export const listUsers = async (pageQuery?: IPageQuery) => {
 	try {
 		const url = `${USERS_ENDPOINT}${buildPageQuery(pageQuery)}`;
 		const { data } = await lendSqrApi.get(url);
-  console.log(data)
 		return data;
 	} catch (error) {
 		throw error;

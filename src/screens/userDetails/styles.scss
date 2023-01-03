@@ -1,0 +1,8 @@
+.summary-details-cover{
+  border: 1px solid #EAECF0;
+  padding: 30px;
+  border-radius: 6px;
+  @media (max-width:550px) {
+    width:100% !important;
+  }
+}

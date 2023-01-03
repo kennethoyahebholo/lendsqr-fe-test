@@ -1,0 +1,18 @@
+.summary-details-cover{
+  border: 1px solid #EAECF0;
+  padding: 30px;
+  border-radius: 6px;
+  @media (max-width:550px) {
+    width:100% !important;
+  }
+  .summary-header{
+    border-bottom: 1px solid  #F2F4F7;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #121212;
+    font-weight: 500;
+    font-family: Inter_Regular;
+    line-height: 19.36px;
+  }
+}

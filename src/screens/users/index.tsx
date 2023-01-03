@@ -1,34 +1,9 @@
-// import {
-//   FunctionComponent,
-// } from 'react';
-// import {
-//   BrowserRouter, Route, Routes,
-// } from 'react-router-dom';
-// import DashboardWrap from '../../components/DashboardWrap';
-// import AllUsers from './AllUsers';
-
-// import './user.scss';
-
-// const Users: FunctionComponent = () => (
-//   <DashboardWrap>
-//     <div className="settlement-root-cover">
-//       <Routes>
-//       <Route element={<AllUsers />} path="/user/all/*" />
-//       </Routes>
-//     </div>
-//   </DashboardWrap>
-// );
-
-// export default Users;
-
 import {
   FunctionComponent, useState, useContext, useEffect
 } from 'react';
 import DashboardWrap from '../../components/DashboardWrap';
 import DashboardHeader from '../../components/DashboardHeader'
 import Card from './Card'
-import EmptyRecord from '../../components/EmptyRecord';
-import useTableColumn from '../../customHooks/useTableColumn';
 
 import { ReactComponent as UsersIcon } from "../../assets/svgs/aUsersIcon.svg";
 import { ReactComponent as SavingsIcon } from "../../assets/svgs/SavingsIcon.svg";
@@ -36,25 +11,20 @@ import { ReactComponent as usersIcn } from "../../assets/svgs/usersIcon.svg";
 import { ReactComponent as loanUserIcon } from "../../assets/svgs/loanUserIcon.svg";
 
 import './user.scss'
-import Table from '../../components/Table/Table2';
+import Table from '../../components/Table/Table';
 
 import {
 	UsersDispatchContext,
 	UsersStateContext,
 } from '../../store/Users/user.provider';
-import { ActionType } from '../../store/Users/user.reducer';
+import { ActionType, UserType } from '../../store/Users/user.reducer';
 import { IPageQuery } from '../../services/users.services';
 import {
 	listUsersAction,
 	userLoadingAction,
 } from '../../store/Users/users.actions';
 import { IUser } from '../../types/_model';
-
-interface IUserTableRecord{
-  defaultUrl?:string;
-  toggleStorageId?:any;
-  hasNameAndImage?:boolean;
-}
+import Pagination from '../../components/Pagination';
 
 const details =  [
       {
@@ -79,47 +49,32 @@ const details =  [
       },
     ]
 
-const formatUsers = (users: IUser[]) => {
+const formatUsers = (users: any) => {
 	if (users.length <= 0) return [];
 	return users.map((user: IUser) => {
 		return {
 			organization: user.orgName,
       username: user.userName,
 			email: user.email,
-			phoneNumber: user.phoneNumber,
+			phoneNumber: user.profile.phoneNumber,
       dateJoined: user.createdAt,
 			status: user.id,
+      id: user.id,
+      guarantor: user.guarantor,
+      profile: user.profile,
+      education: user.education,
+      socials: user.socials,
+      accountNumber: user.accountNumber,
 		};
 	});
 };
 
-const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId, hasNameAndImage}) => {
-  const allColumns = [
-    'ORGANIZATION',
-    'USERNAME',
-    'EMAIL',
-    'PHONE NUMBER',
-    'DATE JOINED',
-    'STATUS'
-  ];
-  const columnLabelFormat = {
-    settlementReference: 'Reference',
-    name: 'Merchant',
-    totalAmount: 'Sales',
-    type: 'Fee Type',
-    totalInterest: 'Commission',
-    totalSettled: 'Settled Amount',
-    status: 'Status',
-    settledOn: 'Date Settled',
-    image__name: 'Merchant',
-  };
+const Users = () => {
 
-
-  const { getColumns, applyChanges, selectedColumns } = useTableColumn(allColumns, toggleStorageId);
-  const [userRec, setuserRec] = useState(null);
-
-  const { loading, users, meta } = useContext(UsersStateContext);
-
+  const { loading, meta } = useContext(UsersStateContext);
+  
+  const usersDetails  = JSON.parse(localStorage.getItem("users") || "false")
+  
 	const dispatch = useContext(UsersDispatchContext) as React.Dispatch<ActionType>;
 
 	const dispatchUsers = async (pageQuery?: IPageQuery) => {
@@ -132,22 +87,17 @@ const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId
 		}
 	};
 
-  // useEffect(()=>{
-  //   console.log(dispatch)
-  // },[dispatch])
-
   useEffect(() => {
 		dispatchUsers();
-    console.log(`hi${users}`)
 	}, []);
 
   return (
       <DashboardWrap>
-        <div className="settlement-merchant">
+        <div className="merchant">
           <DashboardHeader
           title="User"
           />
-        <div className="settlement-card-covers">
+        <div className="card-covers">
           {details?.map?.(({
             icon, status, number
           }, id) => (
@@ -160,30 +110,23 @@ const Users: FunctionComponent<IUserTableRecord> = ({defaultUrl, toggleStorageId
             />
           ))}
         </div>
-        <div className="settlement-table-details-cover">
-        {!userRec? (
-      <Table
-				dispatchAction={dispatchUsers}
-				tableData={formatUsers(users)}
-				enableButton={true}
-				columns={[
-					'organization',
-					'username',
-					'email',
-					'phone number',
-					'date joined',
-					'status',
-				]}
-				loading={loading}
-			></Table>
-        ) : (
-          <EmptyRecord
-            height="calc(100vh - 240px)"
-            main="There is currently no user information."
-          />
-        )}
-
-      </div>
+        <div className="table-details-cover">
+            <Table
+              dispatchAction={dispatchUsers}
+              tableData={formatUsers(usersDetails)}
+              enableButton={true}
+              columns={[
+                'organization',
+                'username',
+                'email',
+                'phone number',
+                'date joined',
+                'status',
+              ]}
+              loading={loading}
+            ></Table>
+            {meta && <Pagination {...meta} dispatchAction={dispatchUsers} />}
+          </div>
         </div>        
       </DashboardWrap>
   )

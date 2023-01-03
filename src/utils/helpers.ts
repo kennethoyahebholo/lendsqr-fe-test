@@ -64,6 +64,8 @@ export function toDateFormat(date: string | number | Date, format: string = 'DD 
 	return moment(new Date(date)).format(format);
 }
 
+export const capitalizeEverFirstLetter = (string:any) => string.replace(/(^\w|\s\w)(\S*)/g, (_:any, m1:any, m2:any) => m1.toUpperCase() + m2.toLowerCase());
+
 // export const toDateFormat = (date: string | number, format: string = 'DD MMMM YYYY', returnVal: string = '______') => {
 //   if (!date) return returnVal;
 //   if (new Date(date).toString() === 'Invalid Date') return returnVal;

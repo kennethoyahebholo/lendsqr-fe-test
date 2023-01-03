@@ -7,6 +7,7 @@ import {
 import Login from './login';
 import User from './users';
 import { UserProvider } from '../store/Users/user.provider';
+import UserDetails from '../screens/userDetails'
 
 const Router: FunctionComponent = () => (
      <BrowserRouter>
@@ -18,6 +19,7 @@ const Router: FunctionComponent = () => (
           <User />
         </UserProvider>
         } />
+        <Route path="/user-details/:userId" element={<UserDetails />} />
        </Routes>
      </div>
      <ToastContainer />
