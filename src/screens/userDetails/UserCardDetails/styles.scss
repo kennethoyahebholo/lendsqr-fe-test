@@ -24,7 +24,13 @@
    &-image {
    object-fit: contain;
    margin-right: 1.5rem;
-  }
+   &-con {
+    img{
+      width: 100%;
+      border-radius: 50%;
+    }
+   }
+  }  
    &-details {
     margin-right: 2rem;
     h4{

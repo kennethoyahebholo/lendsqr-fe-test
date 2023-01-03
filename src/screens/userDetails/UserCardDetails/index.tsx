@@ -21,7 +21,13 @@ const Index: FunctionComponent<ICardDetails > = ({ user, profile}) => {
      <div className="user-cover-wrapper">
       <div className="user-cover-first-section">
        <div className="user-cover-first-section-image">
-        <AvartaIcon />
+        {profile?.avatar?
+        <div className='user-cover-first-section-image-con'>
+          <img src={profile.avatar} alt="" />
+        </div>
+        :
+        <AvartaIcon />        
+        }
        </div>
        <div className='user-cover-first-section-details'>
        <h4>{profile?.firstName} {profile?.lastName}</h4>
