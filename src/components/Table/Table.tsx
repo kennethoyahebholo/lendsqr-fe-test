@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { Card } from '@mui/material';
 import { titleCase, toDateFormat } from '../../utils/helpers'
 import { ReactComponent as TableHeadIcon } from "../../assets/svgs/tableHeadIcon.svg";
 import { ReactComponent as DotsIcon } from "../../assets/svgs/dots.svg";
+import UserActivityModal from './UserActivityModal'
 
 import './Table.scss'
 import { IPageQuery } from '../../types/_model';
@@ -34,8 +35,6 @@ const Table = ({
 	};
 
 	const tableRef = useRef(null);
-
-	const showButton = enableButton ? enableButton : false;
 	const columnData =
 		columns && columns.length > 0
 			? columns
@@ -83,9 +82,7 @@ const Table = ({
 									return (
 										<tr 
 										className="pointer"
-										onClick={() =>
-															handleOpenModalSetTable(	data?.uuid || data?.id, data	)
-														} key={index}>
+										 key={index}>
 											{Object.entries(data).map(
 												([key, value]: any, indexData) => {
 													
@@ -103,6 +100,9 @@ const Table = ({
 													}
 													return (
 														<td
+														 onClick={() =>
+															handleOpenModalSetTable(	data?.uuid || data?.id, data	)
+															}
 															className='table-details'
 															title={value}
 															key={key}
@@ -112,22 +112,13 @@ const Table = ({
 													);
 												}
 											)}
-											{showButton ? (
 												<td className="text-dark fs-6 text-end">
 													<button
-														onClick={() =>
-															handleOpenModalSetTable(
-																data?.uuid || data?.id, data
-															)
-														}
 														className="btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2"
 													>
 														<DotsIcon />
 													</button>
 												</td>
-											) : (
-												<></>
-											)}
 										</tr>
 									);
 								})

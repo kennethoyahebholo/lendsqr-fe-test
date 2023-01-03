@@ -50,7 +50,7 @@ const Login: FunctionComponent<ILogin> = () => {
       }else{
         setItemsToLocalStorage('verifyEmail', formValues?.email);
         toast.success('Login successfully');
-        navigate('./user/all')
+        navigate('/user/all')
         resetForm({
           password: '',
           email: '',
