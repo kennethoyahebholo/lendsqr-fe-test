@@ -95,17 +95,16 @@ const Users = () => {
 		dispatchUsers();
 	}, []);
 
-  const [currentItems, setCurrentItems] = useState([]);
+  const [currentItems, setCurrentItems] = useState<IUser[]>([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 9;
 
   useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;
-    // @ts-ignore
     setCurrentItems(usersDetails?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
-	}, [itemOffset, itemsPerPage, usersDetails]);
+	}, [itemOffset, itemsPerPage]);
 
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % usersDetails.length;
