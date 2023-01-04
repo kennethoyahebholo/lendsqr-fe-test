@@ -77,7 +77,8 @@ const Users = () => {
 
   const { loading, meta } = useContext(UsersStateContext);
   
-  const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
+  // const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
+  const [usersDetails, setUsersDetails] = useState([])
 
   const [currentItems, setCurrentItems] = useState<IUser[]>([]);
   const itemsPerPage = 9;
@@ -90,6 +91,7 @@ const Users = () => {
 		try {
 			dispatch(userLoadingAction(true));
 			dispatch(await listUsersAction(pageQuery));
+      await setUsersDetails(JSON.parse(localStorage.getItem("users") || "false"))
 		} catch (error: any) {
 			console.log(error?.response?.message || error?.message || 'User Fatal error');
 			dispatch(userLoadingAction(false));
@@ -109,7 +111,7 @@ const Users = () => {
 		const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(usersDetails? usersDetails.slice(itemOffset, endOffset) : []);
     setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
-	}, [itemOffset, itemsPerPage]);
+	}, [itemOffset, itemsPerPage, usersDetails]);
 
   
 

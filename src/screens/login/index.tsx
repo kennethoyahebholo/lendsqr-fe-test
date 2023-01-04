@@ -5,14 +5,14 @@ import TextInput from '../../components/input';
 import { FormControl } from '@mui/material';
 import useForm from '../../customHooks/useForm';
 import { setItemsToLocalStorage } from '../../utils/helpers';
-import CircularProgress from '@mui/joy/CircularProgress';
-// import useToast from '../../customHooks/useToast';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 export interface ILogin {
   label?: string;
 }
+
+const Regex = RegExp(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/);
 
 const Login: FunctionComponent<ILogin> = () => {
   const [loading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ const Login: FunctionComponent<ILogin> = () => {
   );
 
   const navigate = useNavigate()
+  const timeout = 2200;
 
   const handleOnSubmit: (arg: any) => void = async (e) => {
     e.preventDefault();
@@ -35,21 +36,27 @@ const Login: FunctionComponent<ILogin> = () => {
     
     console.log(`This is my data ${formValues?.email}`)
     try {
-      const payload = {
-        email: formValues?.email,
-        password: formValues?.password,
-      };
-
       if( formValues?.email === "" || formValues?.password === "" ){
-        toast.error('Please fill in your details');
+        toast.error('Please fill in your details', {autoClose: timeout});
         resetForm({
           password: '',
           email: '',
         });
         setLoading(false);
-      }else{
+      }else if( !Regex.test(formValues?.email) ){
+        toast.error('Invalid Email', {autoClose: timeout});
+        resetForm({
+          password: '',
+          email: '',
+        });
+        setLoading(false);
+        console.log('wrong email')
+        return
+      }
+      
+      else{
         setItemsToLocalStorage('verifyEmail', formValues?.email);
-        toast.success('Login successfully');
+        toast.success('Login successfully', {autoClose: timeout});
         navigate('/user/all')
         resetForm({
           password: '',
@@ -57,41 +64,8 @@ const Login: FunctionComponent<ILogin> = () => {
         });
         setLoading(false);
       }
-
-
-      // const resp = await loginMerchant({ variables: payload });
-      // setLoading(false);
-      // if (resp && resp.data && resp.data.merchantLogin) {
-      //   resetForm({
-      //     password: '',
-      //     email: '',
-      //   });
-        // if (parseInt(resp.data.merchantLogin.status, 10) !== 200) {
-        //   // setError(resp.data.merchantLogin.message);
-        //   Toast.error(resp.data.merchantLogin.message);
-
-        //   return;
-        // }
-        // if (resp.data.merchantLogin.token) {
-        //   setToken(resp.data.merchantLogin.token);
-        //   setUser(resp.data.merchantLogin);
-        //   Toast.success('Login successfully');
-        //   getProfileQuery();
-        //   setHasToken(true);
-        //   return;
-        // }
-        // Toast.error('Something went wrong. Try again or contact Support');
-      // }      
     } catch (e) {
       setLoading(false);
-      // if (e && e.graphQLErrors && e.graphQLErrors.length > 0) {
-      //   const { message } = e.graphQLErrors[0];
-      //   const newMessage = message || 'Invalid credentials';
-      //   Toast.error(newMessage);
-      //   // Toast.error(e.graphQLErrors[0].message)
-      // } else {
-      //   Toast.error('Something went wrong. Try again or contact Support');
-      // }
       toast.error('Something went wrong. Try again or contact Support');
       resetForm({
         password: '',
@@ -135,7 +109,6 @@ const Login: FunctionComponent<ILogin> = () => {
          </div>
          <button className="mb-2 form-btn text-white rounded">
           {loading ? (
-            // <CircularProgress size="md" variant="plain" color="warning"/>
             'LOGGING IN...'
           ) : (
             'LOG IN'
