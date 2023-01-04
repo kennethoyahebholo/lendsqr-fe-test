@@ -77,7 +77,7 @@ const Users = () => {
 
   const { loading, meta } = useContext(UsersStateContext);
   
-  const usersDetails = JSON.parse(localStorage.getItem("users") || [])
+  const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
   
 	const dispatch = useContext(UsersDispatchContext) as React.Dispatch<ActionType>;
 
@@ -102,6 +102,7 @@ const Users = () => {
 
   useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;
+    // @ts-ignore
     setCurrentItems(usersDetails?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
 	}, [itemOffset, itemsPerPage, usersDetails]);
