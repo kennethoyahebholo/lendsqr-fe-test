@@ -79,6 +79,7 @@ const Users = () => {
   
   // const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
   const [usersDetails, setUsersDetails] = useState([])
+  const [isData, setIsData] = useState(false)
 
   const [currentItems, setCurrentItems] = useState<IUser[]>([]);
   const itemsPerPage = 9;
@@ -91,6 +92,7 @@ const Users = () => {
 		try {
 			dispatch(userLoadingAction(true));
 			dispatch(await listUsersAction(pageQuery));
+      setIsData(true)
       await setUsersDetails(JSON.parse(localStorage.getItem("users") || "false"))
 		} catch (error: any) {
 			console.log(error?.response?.message || error?.message || 'User Fatal error');
@@ -105,7 +107,7 @@ const Users = () => {
 
   useEffect(() => {
 		dispatchUsers();
-	}, [usersDetails]);  
+	}, [isData]);  
 
   useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;

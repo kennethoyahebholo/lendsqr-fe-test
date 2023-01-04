@@ -57,7 +57,7 @@ const Login: FunctionComponent<ILogin> = () => {
       else{
         setItemsToLocalStorage('verifyEmail', formValues?.email);
         toast.success('Login successfully', {autoClose: timeout});
-        navigate('/user/all')
+        navigate('/user/all/*')
         resetForm({
           password: '',
           email: '',
