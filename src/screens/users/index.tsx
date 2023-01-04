@@ -78,6 +78,11 @@ const Users = () => {
   const { loading, meta } = useContext(UsersStateContext);
   
   const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
+
+  const [currentItems, setCurrentItems] = useState<IUser[]>([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 9;
   
 	const dispatch = useContext(UsersDispatchContext) as React.Dispatch<ActionType>;
 
@@ -91,25 +96,22 @@ const Users = () => {
 		}
 	};
 
-  useEffect(() => {
-		dispatchUsers();
-	}, []);
-
-  const [currentItems, setCurrentItems] = useState<IUser[]>([]);
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 9;
-
-  useEffect(() => {
-		const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(usersDetails?.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
-	}, [itemOffset, itemsPerPage]);
-
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % usersDetails.length;
     setItemOffset(newOffset)
   }
+
+  useEffect(() => {
+		dispatchUsers();
+	}, []);  
+
+  useEffect(() => {
+		const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(usersDetails? usersDetails.slice(itemOffset, endOffset) : []);
+    setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
+	}, [itemOffset, itemsPerPage]);
+
+  
 
   return (
       <DashboardWrap>
