@@ -105,7 +105,7 @@ const Users = () => {
 
   useEffect(() => {
 		dispatchUsers();
-	}, []);  
+	}, [usersDetails]);  
 
   useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;

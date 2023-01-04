@@ -1,3 +1,5 @@
+import {useEffect} from 'react'
+
 import DashboardWrap from '../../components/DashboardWrap'
 import UserDashboardHeader from './UserDashboardHeader'
 import { useLocation } from 'react-router-dom';
@@ -12,11 +14,15 @@ type Props = {}
 const Index = (props: Props) => {
  const location = useLocation();
 
- const guarantor = location.state.guarantor
- const education = location.state.education
- const profile = location.state.profile
- const socials = location.state.socials
+ const guarantor = location.state?.guarantor
+ const education = location.state?.education
+ const profile = location.state?.profile
+ const socials = location.state?.socials
  const user = location.state
+
+ useEffect(()=>{
+  console.log(location)
+ },[])
 
  return (
    <DashboardWrap>

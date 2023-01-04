@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import { Card } from '@mui/material';
 import { titleCase, toDateFormat } from '../../utils/helpers'
@@ -8,6 +8,18 @@ import UserActivityModal from './UserActivityModal'
 
 import './Table.scss'
 import { IPageQuery } from '../../types/_model';
+
+import {
+	UsersDispatchContext,
+	UsersStateContext,
+} from '../../store/Users/user.provider';
+import {
+	listUsersAction,
+	userLoadingAction,
+} from '../../store/Users/users.actions';
+import { IUser } from '../../types/_model';
+
+import { ActionType, UserType } from '../../store/Users/user.reducer';
 
 type PropsType = {
 	columns: Array<string>;
@@ -30,7 +42,7 @@ const Table = ({
 }: PropsType) => {
 
 	const navigate = useNavigate()
-	const handleOpenModalSetTable = (tableId: string, tableData:any) => {
+	const handleSingleUser = (tableId: string, tableData:any) => {
 		navigate(`/user-details/${tableId}`, { state: tableData})
 	};
 
@@ -101,7 +113,7 @@ const Table = ({
 													return (
 														<td
 														 onClick={() =>
-															handleOpenModalSetTable(	data?.uuid || data?.id, data	)
+															handleSingleUser(	data?.uuid || data?.id, data	)
 															}
 															className='table-details'
 															title={value}
@@ -151,4 +163,4 @@ const Table = ({
 	);
 };
 
-export default Table;
+export default Table
