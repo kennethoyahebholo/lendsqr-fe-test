@@ -102,7 +102,7 @@ const Users = () => {
 
   useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(usersDetails?.slice(itemOffset, endOffset));
+    setCurrentItems(usersDetails.toString().slice(itemOffset, endOffset));
     setPageCount(Math.ceil(usersDetails.length / itemsPerPage))
 	}, [itemOffset, itemsPerPage, usersDetails]);
 
