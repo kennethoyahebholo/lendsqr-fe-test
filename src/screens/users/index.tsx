@@ -80,9 +80,9 @@ const Users = () => {
   const usersDetails = JSON.parse(localStorage.getItem("users") || "false")
 
   const [currentItems, setCurrentItems] = useState<IUser[]>([]);
+  const itemsPerPage = 9;
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 9;
   
 	const dispatch = useContext(UsersDispatchContext) as React.Dispatch<ActionType>;
 
